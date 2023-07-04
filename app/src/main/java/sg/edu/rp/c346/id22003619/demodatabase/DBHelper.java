@@ -47,11 +47,15 @@ public class DBHelper extends SQLiteOpenHelper {
 
         return tasks;
     }
-    public ArrayList<Task> getTasks() {
+    public ArrayList<Task> getTasks(boolean asc) {
         ArrayList<Task> tasks = new ArrayList<Task>();
         SQLiteDatabase db = this.getReadableDatabase();
         String[] columns = {COLUMN_ID, COLUMN_DESCRIPTION, COLUMN_DATE};
-        Cursor cursor = db.query(TABLE_TASK, columns, null, null, null, null, null, null);
+        String orderBy="ASC";
+        if(!asc){
+            orderBy="DESC";
+        }
+        Cursor cursor = db.query(TABLE_TASK, columns, null, null, null, null, COLUMN_DESCRIPTION+orderBy, null);
 
         if (cursor.moveToFirst()) {
             do {

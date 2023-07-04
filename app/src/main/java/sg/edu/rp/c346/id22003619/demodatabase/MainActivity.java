@@ -18,8 +18,9 @@ public class MainActivity extends AppCompatActivity {
         Button btnInsert, btnGetTasks;
         TextView tvResults;
         ListView lvTasks;
-EditText etTask;
-EditText etDate;
+        EditText etTask;
+        EditText etDate;
+        boolean asc=true;
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -53,9 +54,10 @@ EditText etDate;
 
                     // Insert a task
                     ArrayList<String> data = db.getTaskContent();
-                    ArrayList<Task> data2 = db.getTasks();
+                    ArrayList<Task> data2 = db.getTasks(asc);
 
-                db.close();
+                    db.close();
+                    asc=!asc;
 
                     String txt = "";
                     for (int i = 0; i < data.size(); i++) {
